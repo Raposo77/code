@@ -3,10 +3,10 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import login as login_django
 from django.contrib.auth import logout as logout_django
 from django.shortcuts import redirect, render
-
 from .decorators import not_login_required
 from django.contrib.auth import authenticate
 from .forms import AuthForm, RegisterForm
+
 
 ACCOUNT_REGISTER_TEMPLATE = 'account/register.html'
 ACCOUNT_LOGIN_TEMPLATE = 'account/login.html'
