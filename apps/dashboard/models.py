@@ -17,6 +17,8 @@ class Avaliacao(models.Model):
         default='P'
     )
 
+    data = models.DateTimeField()
+
 class Anotacao(models.Model):
     avaliacao = models.ForeignKey(Avaliacao, on_delete=models.DO_NOTHING)
     choices = (

@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from .models import Avaliacao, ContatoAjuda, Anotacao, AlertaDeCrise
+from django import forms 
 
 
 class AvaliacaoForm(ModelForm):
@@ -7,7 +8,13 @@ class AvaliacaoForm(ModelForm):
         model = Avaliacao
         fields = '__all__'
 
+        widgets = {
+            'data': forms.DateInput(
+                attrs={'type': 'date'}, format='%Y-%m-%d'
+            ),
+        }
 
+        
 class ContatoAjudaForm(ModelForm):
     class Meta:
         model = ContatoAjuda
@@ -17,7 +24,7 @@ class ContatoAjudaForm(ModelForm):
 class AnotacaoForm(ModelForm):
     class Meta:
         model = Anotacao
-        fields = '__all__'
+        exclude = ('avaliacao', )
 
 
 class AlertaDeCriseForm(ModelForm):

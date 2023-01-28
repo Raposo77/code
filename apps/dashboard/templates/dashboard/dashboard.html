@@ -1,12 +1,65 @@
 {% extends 'global/base.html' %}
+{% load static %}
 
+{% block head %}
+<script src="{% static 'js/avaliacao.js' %}" defer></script>
+{% endblock head %}
 
 {% block content %}
-<div class="center">
-    <div class="main-container-center">
-        <form action="">
-            {{form_avaliacao}}
-        </form>
+<div class="container mt-3">
+    <button
+	type="button"
+	class="btn btn-primary"
+	data-bs-toggle="modal"
+	data-bs-target="#criar_avaliacao"
+>
+	Criar avaliação
+    </button>
+
+    <!-- Modal -->
+    <div
+        class="modal fade"
+        id="criar_avaliacao"
+        tabindex="-1"
+        aria-labelledby="criar_avaliacao_label"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Criar Avaliacao
+                    </h1>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'dashboard:avaliacao'%}"  method="POST">
+                        {% include 'global/partials/_form.html' with form=form_avaliacao %}
+                        <br>
+                        <button class="btn btn-success" type="button" onclick="add_anotation()">Adicionar anotacao</button>
+                        <div id="anotation-content"></div>
+                        <button
+                        type="submit"
+                        class="btn btn-success btn-lg"
+                        data-bs-dismiss="modal"
+                    >
+                        Salvar
+                    </button>
+                    </form>
+                </div>
+                <div class="modal-footer text-center justify-content-center">
+         
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+<div class="d-none" id="form_anotation">
+    {% include 'global/partials/_form.html' with form=form_anotacao %}
 </div>
 {% endblock content %}
