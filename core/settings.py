@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # 3th apps
     'widget_tweaks',
     # own apps
+    'account',
     'dashboard',
 ]
 
@@ -145,6 +146,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#Configuração usuário customizado
+
+AUTH_USER_MODEL = 'account.User'
+
+# Configuração email
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #messages
 
