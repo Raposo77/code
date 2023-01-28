@@ -156,3 +156,4 @@ MESSAGE_TAGS = {
     constants.INFO: 'message-info',
 
 }
+

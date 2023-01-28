@@ -9,7 +9,7 @@ class Avaliacao(models.Model):
         ('E', 'Excelente')
     )
 
-    nome = models.CharField(
+    status = models.CharField(
         choices=choices,
         blank=False, null=False,
         max_length=100
@@ -40,7 +40,28 @@ class PerfilUsuario(models.Model):
 class ContatoAjuda(models.Model):
 
     usuario = models.ForeignKey(PerfilUsuario, on_delete=models.CASCADE, null=True, blank=True)
-    contato = models.CharField(max_length=11)
+    email = models.CharField(max_length=255)
+
+
+class AlertaDeCrise(models.Model):
+
+    choices = (
+        ('P', 'Pânico'),
+        ('D', 'Depressão'),
+        ('A', 'Ansiedade'),
+)
+    tipo = models.CharField(
+        choices=choices, null=True, blank=True
+    )
+
+    inicio = models.DateTimeField()
+    fim = models.DateField(blank=True, null=True)
+
+
+   
+
+
+
 
 
 
