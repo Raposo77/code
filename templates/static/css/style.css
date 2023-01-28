@@ -14,10 +14,9 @@ body {
 }
 
 .main-content {
-	padding: 10px;
+	padding: 10px 10px 10px 290px;
 	background-color: ghostwhite;
 	min-height: calc(100vh - 56px);
-	margin-left: 280px;
 	width: 100%;
 }
 
