@@ -17,7 +17,7 @@ class ContatoAjudaForm(ModelForm):
 class AnotacaoForm(ModelForm):
     class Meta:
         model = Anotacao
-        fields = '__all__'
+        exclude = ('avaliacao', )
 
 
 class AlertaDeCriseForm(ModelForm):
