@@ -17,9 +17,11 @@ def dashboard(request: HttpRequest) -> HttpResponse:
         'form_alerta_crise': form_alerta_crise,
         'form_anotacao':  form_anotacao,
         'form_contato_ajuda': form_contato_ajuda
-        
+
         })
 
+
+def send_message(request)
 
 
 
