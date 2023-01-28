@@ -14,8 +14,10 @@ def dashboard(request: HttpRequest) -> HttpResponse:
     return render(request, 'dashboard/dashboard.html', context={
 
         'form_avaliacao': form_avaliacao,
-
-     
+        'form_alerta_crise': form_alerta_crise,
+        'form_anotacao':  form_anotacao,
+        'form_contato_ajuda': form_contato_ajuda
+        
         })
 
 

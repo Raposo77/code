@@ -57,30 +57,6 @@ class AlertaDeCrise(models.Model):
     fim = models.DateField(blank=True, null=True)
 
 
-class DiasDaSemana(models.Model):
-    choices = (
-        ('SE', 'Segunda'),
-        ('TE', 'Terça'),
-        ('QU', 'Quarta'),
-        ('QI', 'Quinta'),
-        ('SEX', 'Sexta'),
-        ('SA', 'Sábado'),
-        ('D', 'Domingo'),
-        
-    )
-
-    dia = models.CharField(
-        max_length=3,
-        choices=choices,
-        blank=False,
-        null=False,
-        default='SE'
-
-    )
-
-
-
-
 
 
 
