@@ -3,4 +3,8 @@ from django.http import HttpRequest, HttpResponse
 
 
 def dashboard(request: HttpRequest) -> HttpResponse:
-    return HttpResponse('test') 
+    return render(request, 'dashboard/dashboard.html')
+
+
+
+
