@@ -6,7 +6,7 @@ from django import forms
 class AvaliacaoForm(ModelForm):
     class Meta:
         model = Avaliacao
-        fields = '__all__'
+        exclude = ('user',)
 
         widgets = {
             'data': forms.DateInput(

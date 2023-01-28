@@ -1,8 +1,13 @@
 from django.db import models
 from account.models import PerfilUsuario
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 class Avaliacao(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     choices = (
         ('P', 'Péssimo'),
         ('R', 'Ruim'),

@@ -29,8 +29,10 @@ def cadastro_avaliacao(request: HttpRequest) -> HttpResponse:
   
     form = AvaliacaoForm(request.POST)
     if form.is_valid():
+        form.save(commit=False)
+        form.instance.user = request.user
         form.save()
-        return HttpResponse('dddd')
+        return HttpResponse('Salvado com sucesso')
 
         
     messages.error(request, 'Verifique os dados digitados.')
