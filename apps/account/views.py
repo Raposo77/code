@@ -2,10 +2,10 @@ from django.contrib import messages
 from django.contrib.auth import login as login_django
 from django.contrib.auth import logout as logout_django
 from django.shortcuts import redirect, render
-
 from .decorators import not_login_required
 from django.contrib.auth import authenticate
 from .forms import AuthForm, RegisterForm
+
 
 ACCOUNT_REGISTER_TEMPLATE = 'account/register.html'
 ACCOUNT_LOGIN_TEMPLATE = 'account/login.html'
@@ -23,7 +23,6 @@ def register(request):
         if form.is_valid():
             user = form.save()
             user.save()
-            __import__('ipdb').set_trace()
             messages.success(request, 'Usuário criado com sucesso!')
             return redirect('account:login')
         else:

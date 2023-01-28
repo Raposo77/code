@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from .forms import UserChangeForm, UserCreationForm
 from .models import User
+from .models import PerfilUsuario
 
 
 @admin.register(User)
@@ -45,3 +46,8 @@ class UserAdmin(DjangoUserAdmin):
     ordering = ('email',)
     form = UserChangeForm
     add_form = UserCreationForm
+
+
+@admin.register(PerfilUsuario)
+class PerfilUsuarioAdmin(admin.ModelAdmin):
+    list_display = ('telefone', 'nome', 'sobrenome', 'endereco')

@@ -16,3 +16,9 @@ class User(AbstractUser):
 
     def __str__(self) -> str:
         return self.email
+
+class PerfilUsuario(models.Model):
+    telefone = models.CharField(max_length=11)
+    nome = models.CharField(max_length=255)
+    sobrenome = models.CharField(max_length=255)
+    endereco = models.CharField(max_length=255)

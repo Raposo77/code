@@ -95,3 +95,12 @@ body {
 .icon-eye i {
 	cursor: pointer;
 }
+
+.center{
+	margin-top: 3%;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+
