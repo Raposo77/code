@@ -1,4 +1,8 @@
 {% extends 'global/base.html' %}
+{% load static %}
+{% block head %}
+<script src="{% static 'js/auth.js' %}" defer></script>
+{% endblock head %}
 {% block content %}
 <div class="container">
 	<div class="row justify-content-center">
@@ -14,16 +18,19 @@
 						<a href="{% url 'account:register' %}">Cadastro</a></span
 					>
 				</div>
+				{% include 'global/partials/_messages.html' %}
 				<form action="." method="POST" class="auth-form">
+					{% csrf_token %}
 					<div class="input-group mb-3">
 						<span class="input-group-text" id="basic-addon1"
 							><i class="fa-solid fa-user"></i></span>
 						<input
 							class="form-control form-control-lg"
 							type="text"
-							name="username"
+							name="email"
 							placeholder="usuário"
 							aria-label="usuário"
+							value="{{ form.email.value|default:'' }}"
 							required
 						/>
 					</div>
@@ -37,6 +44,7 @@
 							name="password"
 							placeholder="senha"
 							aria-label="senha"
+							value="{{ form.password.value|default:'' }}"
 							required
 						/>
 						<span class="input-group-text icon-eye"><i class="fa-solid fa-eye"></i></span>
