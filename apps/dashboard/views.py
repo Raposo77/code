@@ -6,6 +6,7 @@ from .models import Avaliacao
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+DASHBOARD_URL = 'dashboard:dashboard'
 
 def index(request: HttpRequest) -> HttpResponse:
     return render(request, 'dashboard/index.html')
@@ -25,38 +26,38 @@ def dashboard(request: HttpRequest) -> HttpResponse:
 
 def cadastro_avaliacao(request: HttpRequest) -> HttpResponse:
     if request.method != 'POST':
-        return redirect(reverse('dashboard:dashboard'))
-  
+        return redirect(DASHBOARD_URL)
+
     form = AvaliacaoForm(request.POST)
     if form.is_valid():
         form.save(commit=False)
         form.instance.user = request.user
         form.save()
-        return HttpResponse('Salvado com sucesso')
+        messages.success(request, 'Avaliacao salva com sucesso!')
+        return redirect(DASHBOARD_URL)
 
-        
     messages.error(request, 'Verifique os dados digitados.')
-    return redirect(reverse('dashboard:dashboard'))
- 
+    return redirect(DASHBOARD_URL)
 
-def view_cadastro_alerta_de_crise(request: HttpRequest) -> HttpResponse:
+
+def cadastro_alerta_de_crise(request: HttpRequest) -> HttpResponse:
     if request.method != 'POST':
-        return redirect(reverse('dashboard:dashboard'))
+        return redirect(DASHBOARD_URL)
     
     form = AlertaDeCriseForm(request.POST)
     if form.is_valid():
         pass
     messages.error(request, 'Verifique os dados digitados.')
-    return redirect(reverse('dashboard:dashboard'))
+    return redirect(DASHBOARD_URL)
  
 
-def view_contato_ajuda(request: HttpRequest) -> HttpResponse:
+def cadastro_contato_ajuda(request: HttpRequest) -> HttpResponse:
     form = ContatoAjuda(request.POST)
     if form.is_valid():
-        form
+        form.save()
         pass
     messages.error(request, 'Verifique os dados digitados.')
-    return redirect(reverse('dashboard:dashboard'))
+    return redirect(DASHBOARD_URL)
  
 
 def crise(request):
