@@ -1,4 +1,8 @@
 {% extends 'global/base.html' %}
+{% load static %}
+{% block head %}
+<script src="{% static 'js/auth.js' %}" defer></script>
+{% endblock head %}
 {% block content %}
 	<div class="container">
 		<div class="row justify-content-center">
@@ -14,16 +18,19 @@
 							<a href="{% url 'account:login' %}">Acesso</a></span
 						>
 					</div>
+					{% include 'global/partials/_messages.html' %}
 					<form action="." method="POST" class="auth-form">
+						{% csrf_token %}
 						<div class="input-group mb-3">
 							<span class="input-group-text" id="basic-addon1"
 								><i class="fa-solid fa-user"></i></span>
 							<input
 								class="form-control form-control-lg"
 								type="text"
-								name="username"
-								placeholder="usuário"
-								aria-label="usuário"
+								name="first_name"
+								placeholder="nome"
+								aria-label="nome"
+								value="{{ form.first_name.value|default:'' }}"
 								required
 							/>
 						</div>
@@ -36,8 +43,19 @@
 								name="email"
 								placeholder="email"
 								aria-label="email"
+								value="{{ form.email.value|default:'' }}"
 								required
 							/>
+						</div>
+						<div>
+							{{ form.email.errors }}
+							{% if form.email.errors %}
+								{% for error in form.email.errors %}
+								<div class="invalid-feedback">
+								{{ error }}
+								</div>
+								{% endfor %}								
+							{% endif %}
 						</div>
 						<div class="input-group mb-3">
 							<span class="input-group-text" id="basic-addon1"
@@ -49,6 +67,7 @@
 								name="password1"
 								placeholder="senha"
 								aria-label="senha"
+								value="{{ form.password1.value|default:'' }}"
 								required
 							/>
 							<span class="input-group-text icon-eye"><i class="fa-solid fa-eye"></i></span>
@@ -63,12 +82,20 @@
 								name="password2"
 								placeholder="confirmação da senha"
 								aria-label="confirmação da senha"
+								value="{{ form.password2.value|default:'' }}"
 								required
 							/>
 							<span class="input-group-text icon-eye"><i class="fa-solid fa-eye"></i></span>
 						</div>
 						<div>
-							<a class="float-end" href="recovery.html">Esqueceu a senha?</a>
+							{{ form.password2.errors }}
+							{% if form.password1.errors %}
+								{% for error in form.password1.errors %}
+								<div class="invalid-feedback">
+								{{ error }}
+								</div>
+								{% endfor %}								
+							{% endif %}
 						</div>
 						<div class="form-group mt-5 text-center">
 							<button

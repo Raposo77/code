@@ -22,12 +22,13 @@ def register(request):
     elif request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            form_new = form.save(commit=False)
-            form_new.is_active = False
-            form_new.save()
+            user = form.save()
+            user.save()
+            messages.success(request, 'Usuário criado com sucesso!')
             return redirect('account:login')
         else:
             data['form'] = form
+            messages.error(request, 'Dados inválidos')
             return render(request, ACCOUNT_REGISTER_TEMPLATE, data)
 
 def logout(request):
@@ -46,23 +47,12 @@ def login(request):
         return render(request, ACCOUNT_LOGIN_TEMPLATE, data)
     elif request.method == 'POST':
         form = AuthForm(request.POST)
-
+        
         if form.is_valid():
-            try:
-                user = authenticate(**form.cleaned_data)
+            if user := authenticate(**form.cleaned_data):
                 login_django(request, user)
-                return redirect('common:index')
-            except UserNotActivated:
-                data['form'] = form
-                messages.error(request, 'Conta não ativa.')
+                return redirect('dashboard:dashboard')
 
-                return render(request, ACCOUNT_LOGIN_TEMPLATE, data)
-            except get_user_model().DoesNotExist:
-                data['form'] = form
-                messages.error(request, 'Dados inválidos')
-
-                return render(request, ACCOUNT_LOGIN_TEMPLATE, data)
-        else:
-            data['form'] = form
-
-            return render(request, ACCOUNT_LOGIN_TEMPLATE, data)
+        data['form'] = form
+        messages.error(request, 'Dados inválidos')
+        return render(request, ACCOUNT_LOGIN_TEMPLATE, data)
