@@ -1,0 +1,31 @@
+{% extends 'global/base.html' %}
+{% block content %}
+<aside
+    class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar"
+    style="width: 280px"
+    >
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+            <a href="{% url 'dashboard:dashboard' %}" class="nav-link active" aria-current="page">
+                <i class="fa-regular fa-file-lines"></i>
+                Avaliações
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'dashboard:crise' %}" class="nav-link text-white">
+                <i class="fa-solid fa-gauge-high"></i>
+                Crises
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'dashboard:ajuda' %}" class="nav-link text-white">
+                <i class="fa-solid fa-boxes-stacked"></i>
+                Ajuda
+            </a>
+        </li>
+    </ul>
+</aside>
+<div class="main-content">
+    {% block dashboard_content %}{% endblock dashboard_content %}
+</main>
+{% endblock content %}
