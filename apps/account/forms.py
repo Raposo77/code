@@ -18,3 +18,16 @@ class UserCreationForm(auth_forms.UserCreationForm):
 class RegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         fields = ('first_name', 'email')
+
+class AuthForm(forms.Form):
+    email = forms.EmailField(
+        label='Email',
+        max_length=254,
+        widget=forms.EmailInput(attrs={'class': 'form-control'}),
+    )
+    password = forms.CharField(
+        label='Senha',
+        max_length=254,
+        strip=False,
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+    )
