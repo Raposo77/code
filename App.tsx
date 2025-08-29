@@ -6,6 +6,8 @@ import HomeScreen from './src/screens/HomeScreen';
 import LessonsScreen from './src/screens/LessonsScreen';
 import VocabularyScreen from './src/screens/VocabularyScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
+import { Ionicons } from '@expo/vector-icons';
+import { theme } from './src/theme/theme';
 
 const AppTheme: Theme = {
 	...DefaultTheme,
@@ -23,10 +25,21 @@ export default function App() {
       <StatusBar style="auto" />
       <Tab.Navigator
 			initialRouteName="Home"
-			screenOptions={{
+        screenOptions={({ route }) => ({
 				headerTitleAlign: 'center',
+				tabBarActiveTintColor: theme.colors.primary,
+				tabBarInactiveTintColor: theme.colors.subtext,
 				tabBarLabelStyle: { fontSize: 12 },
-			}}>
+				tabBarIcon: ({ color, size }) => {
+					const iconName =
+						route.name === 'Home' ? 'home' :
+						route.name === 'Lessons' ? 'book' :
+						route.name === 'Vocabulary' ? 'albums' :
+						'person';
+					return <Ionicons name={iconName as any} size={size ?? 20} color={color} />;
+				},
+			})}
+		>
         <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarLabel: 'Início' }} />
         <Tab.Screen name="Lessons" component={LessonsScreen} options={{ tabBarLabel: 'Aulas' }} />
         <Tab.Screen name="Vocabulary" component={VocabularyScreen} options={{ tabBarLabel: 'Vocabulário' }} />
