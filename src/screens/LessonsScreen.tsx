@@ -4,7 +4,7 @@ import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navig
 import { lessons } from '../data/lessons';
 import { theme } from '../theme/theme';
 import { loadProgress } from '../storage/progress';
-import React from 'react';
+
 
 type RootStackParamList = {
 	LessonsList: undefined;
@@ -49,15 +49,6 @@ export default function LessonsScreen() {
 			<Stack.Screen name="LessonsList" component={LessonsListScreen} options={{ title: 'Aulas' }} />
 			<Stack.Screen name="LessonDetail" getComponent={() => require('./LessonDetailScreen').default} options={{ title: 'Aula' }} />
 		</Stack.Navigator>
-	);
-}
-
-export default function LessonsScreen() {
-	return (
-		<View style={styles.container}>
-			<Text style={styles.title}>Aulas</Text>
-			<Text style={styles.subtitle}>Prossiga pelas lições passo a passo.</Text>
-		</View>
 	);
 }
 
